@@ -2,6 +2,15 @@
 const { cardContent } = Astro.props;
 ---
 
+<!-- html{
+
+--content-width: 
+--card-padding: 
+--card-gap
+--card-border-radius 
+--card-background 
+--card-text-color 
+} -->
 <ul class="full">
   {
     cardContent.map((card) => (
@@ -16,28 +25,19 @@ const { cardContent } = Astro.props;
 <style>
   ul {
     list-style: none;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto; /* Scroll på x-aksen */
+    scroll-snap-type: x mandatory; /* Aktiver snap på x-aksen */
+    scroll-behavior: smooth;
   }
-  .content {
-    --gap: clamp(1rem, 6vw, 3rem);
-    --full: minmax(var(--gap), 1fr);
-    --content: min(50ch, 100% - var(--gap) * 2);
-    --feature: minmax(0, 8rem);
-
-    display: grid;
-    grid-template-columns:
-      [full-start] var(--full)
-      [feature-start] var(--feature)
-      [content-start] var(--content) [content-end]
-      var(--feature) [feature-end]
-      var(--full) [full-end];
-  }
-
-  .content > * {
-    grid-column: content;
-  }
-
-  .feature {
-    grid-column: feature;
+  li {
+    padding: 2rem;
+    background-color: rgb(165, 168, 171);
+    border-radius: 10px;
+    flex: 0 0 40%; /* Hvert item tager 80% af bredden */
+    scroll-snap-align: start; /* Snap ved start af elementet */
+    scroll-snap-stop: always;
   }
   .full {
     grid-column: full;
